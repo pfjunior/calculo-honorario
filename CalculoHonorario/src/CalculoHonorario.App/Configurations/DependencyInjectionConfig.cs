@@ -1,4 +1,5 @@
-﻿using CalculoHonorario.Business.Interfaces.Notifications;
+﻿using CalculoHonorario.App.Services;
+using CalculoHonorario.Business.Interfaces.Notifications;
 using CalculoHonorario.Business.Interfaces.Repository;
 using CalculoHonorario.Business.Interfaces.Services;
 using CalculoHonorario.Business.Notifications;
@@ -19,6 +20,9 @@ public static class DependencyInjectionConfig
         // Business
         services.AddScoped<IHonorarioService, HonorarioService>();
         services.AddScoped<INotificador, Notificador>();
+
+        // Application
+        services.AddScoped<IApplicationService, ApplicationService>();
 
         return services;
     }

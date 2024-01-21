@@ -4,12 +4,11 @@ public class Honorario : Entity
 {
     protected Honorario() { }
 
-    public Honorario(string descricao, decimal proLabore, decimal servicoContabil, decimal simplesNacional)
+    public Honorario(string descricao, decimal proLabore, decimal servicoContabil)
     {
         Descricao = descricao;
         ProLaboreBruto = proLabore;
         ServicoContabil = servicoContabil;
-        SimplesNacional = simplesNacional;
     }
 
     public string? Descricao { get; private set; }
@@ -56,45 +55,50 @@ public class Honorario : Entity
     private const int QUANTIDADE_DIAS = 22;
     private const decimal FGTS_PORCENTAGEM = 8 / 100;
     private const decimal INSS_PORCENTAGEM = 11 / 100;
+    private const decimal IRPF_PORCENTAGEM = (decimal)22.50 / 100;
     private const double FATOR_MULTIPLICADOR = 1.06;
 
     private void CalcularProvisaoFerias(decimal rendaMensal)
     {
         ProvisaoFerias = (rendaMensal / 12) * ((rendaMensal / 12) / 3);
 
-        CalcularFgts();
+        //CalcularFgts();
     }
 
     private void CalcularProvisaoDecimoTerceiro(decimal rendaMensal)
     {
         ProvisaoDecimoTerceiro = rendaMensal / 12;
 
-        CalcularFgts();
+        //CalcularFgts();
     }
 
-    private void CalcularFgts()
+    public void CalcularFgts()
     {
         Fgts = (ProLaboreBruto + ProvisaoFerias + ProvisaoDecimoTerceiro) * FGTS_PORCENTAGEM;
 
-        CalcularInss();
-        CalcularHonorario();
+        //CalcularInss();
+        //CalcularHonorario();
     }
 
-    private void CalcularInss()
+    public void CalcularInss()
     {
         Inss = ProLaboreBruto * INSS_PORCENTAGEM;
 
-        CalcularProlaboreLiquido();
+        //CalcularProlaboreLiquido();
     }
 
     private void CalcularValeRefeicao(decimal valor) => ValeRefeicao = valor * QUANTIDADE_DIAS;
 
     private void CalcularValeTransporte(decimal valor) => ValeTransporte = valor * QUANTIDADE_DIAS;
 
-    private void CalcularProlaboreLiquido() => ProLaboreLiquido = ProLaboreBruto - Inss - Irpf;
+    public void CalcularProlaboreLiquido() => ProLaboreLiquido = ProLaboreBruto - Inss - Irpf;
 
     private void CalcularLucroLiquido() => LucroLiquido = LucroBruto - ProLaboreLiquido;
 
-    private void CalcularHonorario() => ValorHonorario = (ProLaboreBruto + ProvisaoFerias + ProvisaoDecimoTerceiro + ValeRefeicao + ValeTransporte + Fgts + ServicoContabil) * (decimal)FATOR_MULTIPLICADOR;
+    public void CalcularHonorario() => ValorHonorario = (ProLaboreBruto + ProvisaoFerias + ProvisaoDecimoTerceiro + ValeRefeicao + ValeTransporte + Fgts + ServicoContabil) * (decimal)FATOR_MULTIPLICADOR;
+
+    public void CalcularSimplesNacional(double porcentagem) => SimplesNacional = ValorHonorario * ((decimal)porcentagem / 100);
+
+    public void CalcularIrpf() => Irpf = ProLaboreBruto * IRPF_PORCENTAGEM;
     #endregion
 }

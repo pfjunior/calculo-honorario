@@ -1,18 +1,46 @@
 ﻿using CalculoHonorario.Business.Models;
+using System.ComponentModel;
+using System.ComponentModel.DataAnnotations;
 
 namespace CalculoHonorario.App.ViewModels;
 
 public class HonorarioViewModel
 {
     public Guid Id { get; set; }
+
+    [DisplayName("Descrição")]
     public string Descricao { get; set; }
-    public decimal ProLaboreLiquido { get; set; }
-    public decimal Fgts { get; private set; }
-    public decimal ServicoContabil { get; private set; }
-    public decimal SimplesNacional { get; private set; }
-    public decimal Inss { get; private set; }
-    public decimal Irpf { get; private set; }
+
+    [DisplayName("Valor Honorário")]
+    [DataType(DataType.Currency)]
     public decimal ValorHonorario { get; private set; }
+
+    [DisplayName("Pro Labore Líquido")]
+    [DataType(DataType.Currency)]
+    public decimal ProLaboreLiquido { get; set; }
+
+    [DisplayName("FGTS")]
+    [DataType(DataType.Currency)]
+    public decimal Fgts { get; private set; }
+
+    [DisplayName("INSS")]
+    [DataType(DataType.Currency)]
+    public decimal Inss { get; private set; }
+
+    [DisplayName("IRPF")]
+    [DataType(DataType.Currency)]
+    public decimal Irpf { get; private set; }
+
+    [DisplayName("Serviço Contábil")]
+    [DataType(DataType.Currency)]
+    public decimal ServicoContabil { get; private set; }
+
+    [DisplayName("Simples Nacional")]
+    [DataType(DataType.Currency)]
+    public decimal SimplesNacional { get; private set; }
+    
+    [DisplayName("Lucro Líquido")]
+    [DataType(DataType.Currency)]
     public decimal LucroLiquido { get; private set; }
 
 

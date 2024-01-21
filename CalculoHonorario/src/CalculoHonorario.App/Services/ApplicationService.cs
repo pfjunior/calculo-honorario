@@ -6,7 +6,7 @@ using CalculoHonorario.Business.Models;
 
 namespace CalculoHonorario.App.Services;
 
-public class ApplicationService : BaseService
+public class ApplicationService : BaseService, IApplicationService
 {
     private readonly IHonorarioService _service;
 
@@ -14,8 +14,6 @@ public class ApplicationService : BaseService
     {
         _service = service;
     }
-
-    public async Task<Honorario> ObterPorIdAsync(Guid id) => await _service.ObterPorIdAsync(id);
 
     public async Task<List<HonorarioViewModel>> ObterTodosAsync()
     {
@@ -26,16 +24,29 @@ public class ApplicationService : BaseService
         model.ForEach(item => list.Add(viewModel.MapearParaViewModel(item)));
 
         return list;
+    }
 
+    public async Task<HonorarioViewModel> ObterPorIdAsync(Guid id)
+    {
+        var model = await _service.ObterPorIdAsync(id);
+        var viewModel = new HonorarioViewModel();
+        return viewModel.MapearParaViewModel(model);
     }
 
     public async Task AdicionarAsync(AdicionarHonorarioViewModel model)
     {
-        var honorario = new Honorario(model.Descricao, model.RendaMensal, model.ServicoContabil, model.SimplesNacional);
+        var honorario = new Honorario(model.Descricao, model.RendaMensal, model.ServicoContabil);
         honorario.CalcularProvisaoFeriasDecimoTerceiro(model.RendaMensal);
+        honorario.CalcularFgts();
         // TODO: Refatorar o calculo do vale transporte quando tiver mais de uma passagem
         honorario.CalcularVales(model.TemValeRefeicao ? model.ValorVR : 0, model.TemValeTransporte ? model.ValorVT : 0);
+        honorario.CalcularHonorario();
+        honorario.CalcularSimplesNacional(model.SimplesNacional);
         honorario.CalcularLucroBruto();
+        honorario.CalcularInss();
+        honorario.CalcularIrpf();
+        honorario.CalcularProlaboreLiquido();
+
 
         await _service.AdicionarAsync(honorario);
     }
@@ -52,4 +63,6 @@ public class ApplicationService : BaseService
 
         await _service.RemoverAsync(honorario);
     }
+
+
 }

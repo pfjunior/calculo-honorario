@@ -15,12 +15,12 @@
 
 <table class="table table-hover">
     <thead class="thead-dark">
-        <tr>
-            <th>
-
-            </th>
+        <tr class="text-center">
             <th>
                 @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorHonorario)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.ProLaboreLiquido)
@@ -29,19 +29,16 @@
                 @Html.DisplayNameFor(model => model.Fgts)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ServicoContabil)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.SimplesNacional)
-            </th>
-            <th>
                 @Html.DisplayNameFor(model => model.Inss)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Irpf)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ValorHonorario)
+                @Html.DisplayNameFor(model => model.ServicoContabil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SimplesNacional)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.LucroLiquido)
@@ -52,9 +49,12 @@
     <tbody>
         @foreach (var item in Model)
         {
-            <tr>
-                <td>
+            <tr class="text-center align-middle">
+                <td class="text-start">
                     @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorHonorario)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.ProLaboreLiquido)
@@ -63,19 +63,16 @@
                     @Html.DisplayFor(modelItem => item.Fgts)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ServicoContabil)
-                </td>
-                <td>
-                    @Html.DisplayFor(modelItem => item.SimplesNacional)
-                </td>
-                <td>
                     @Html.DisplayFor(modelItem => item.Inss)
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.Irpf)
                 </td>
                 <td>
-                    @Html.DisplayFor(modelItem => item.ValorHonorario)
+                    @Html.DisplayFor(modelItem => item.ServicoContabil)
+                </td>
+                <td>
+                    @item.SimplesNacional%
                 </td>
                 <td>
                     @Html.DisplayFor(modelItem => item.LucroLiquido)

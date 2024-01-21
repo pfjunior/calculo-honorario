@@ -8,14 +8,21 @@ namespace CalculoHonorario.App.Controllers;
 [Route("honorarios")]
 public class HonorariosController : BaseController
 {
-    private readonly ApplicationService _service;
+    private readonly IApplicationService _service;
 
-    public HonorariosController(INotificador notificador) : base(notificador) { }
+    public HonorariosController(INotificador notificador, IApplicationService service) : base(notificador)
+    {
+        _service = service;
+    }
 
 
     public async Task<IActionResult> Index()
     {
-        return View(await _service.ObterTodosAsync());
+        var results = await _service.ObterTodosAsync();
+
+        if (results == null) return NotFound();
+
+        return View(results);
     }
 
     [Route("detalhes/{id:guid}")]
