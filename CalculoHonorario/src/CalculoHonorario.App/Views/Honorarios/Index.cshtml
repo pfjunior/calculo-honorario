@@ -1,0 +1,90 @@
+﻿@model IEnumerable<CalculoHonorario.App.ViewModels.HonorarioViewModel>
+
+@{
+    ViewData["Title"] = "Honorário";
+}
+
+<h1>@ViewData["Title"]</h1>
+<hr />
+
+<vc:Summary></vc:Summary>
+
+<p>
+    <a class="btn btn-info" asp-action="Create">Novo</a>
+</p>
+
+<table class="table table-hover">
+    <thead class="thead-dark">
+        <tr>
+            <th>
+
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Descricao)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ProLaboreLiquido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Fgts)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ServicoContabil)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SimplesNacional)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Inss)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Irpf)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ValorHonorario)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LucroLiquido)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Descricao)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ProLaboreLiquido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Fgts)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ServicoContabil)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.SimplesNacional)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Inss)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Irpf)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ValorHonorario)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.LucroLiquido)
+                </td>
+                <td class="text-right">
+                    <a class="btn btn-warning" asp-controller="Honorarios" asp-action="Details" asp-route-id="@item.Id"><spam class="fa fa-search"></spam> </a>
+                    <a class="btn btn-danger" asp-controller="Honorarios" asp-action="Delete" asp-route-id="@item.Id"><spam class="fa fa-trash"></spam> </a>
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
