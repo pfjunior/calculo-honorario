@@ -15,7 +15,7 @@ public class HonorarioViewModel
     [DataType(DataType.Currency)]
     public decimal ValorHonorario { get; private set; }
 
-    [DisplayName("Pro Labore Líquido")]
+    [DisplayName("Pró-Labore Líquido")]
     [DataType(DataType.Currency)]
     public decimal ProLaboreLiquido { get; set; }
 
@@ -38,7 +38,7 @@ public class HonorarioViewModel
     [DisplayName("Simples Nacional")]
     [DataType(DataType.Currency)]
     public decimal SimplesNacional { get; private set; }
-    
+
     [DisplayName("Lucro Líquido")]
     [DataType(DataType.Currency)]
     public decimal LucroLiquido { get; private set; }

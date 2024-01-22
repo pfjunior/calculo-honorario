@@ -15,7 +15,7 @@ public class HonorarioRepository : IHonorarioRepository
 
     public async Task<Honorario> ObterPorIdAsync(Guid id) => await _context.Honorarios.FindAsync(id);
 
-    public async Task<List<Honorario>> ObterTodosAsync() => await _context.Honorarios.ToListAsync();
+    public async Task<List<Honorario>> ObterTodosAsync() => await _context.Honorarios.OrderByDescending(x => x.CadastradoEm).ToListAsync();
 
     public async Task<IEnumerable<Honorario>> Buscar(Expression<Func<Honorario, bool>> predicate) => await _context.Honorarios.AsTracking().Where(predicate).ToListAsync();
 
