@@ -14,18 +14,18 @@ public class Honorario : Entity
     public string? Descricao { get; private set; }
     public decimal ProLaboreBruto { get; private set; }
     public decimal ProLaboreLiquido { get; private set; }
-    public decimal ProvisaoFerias { get; private set; }
-    public decimal ProvisaoDecimoTerceiro { get; private set; }
-    public decimal ValeRefeicao { get; private set; }
-    public decimal ValeTransporte { get; private set; }
-    public decimal Fgts { get; private set; }
-    public decimal ServicoContabil { get; private set; }
-    public decimal SimplesNacional { get; private set; }
-    public decimal Inss { get; private set; }
-    public decimal Irpf { get; private set; }
-    public decimal ValorHonorario { get; private set; }
     public decimal LucroBruto { get; private set; }
     public decimal LucroLiquido { get; private set; }
+    public decimal ValorHonorario { get; private set; }
+    public decimal ProvisaoFerias { get; private set; }
+    public decimal ProvisaoDecimoTerceiro { get; private set; }
+    public decimal Fgts { get; private set; }
+    public decimal Inss { get; private set; }
+    public decimal Irpf { get; private set; }
+    public decimal ValeRefeicao { get; private set; }
+    public decimal ValeTransporte { get; private set; }
+    public decimal ServicoContabil { get; private set; }
+    public decimal SimplesNacional { get; private set; }
     public DateTime CadastradoEm { get; private set; }
 
     public void CalcularProvisaoFeriasDecimoTerceiro(decimal rendaMensal)
@@ -43,62 +43,55 @@ public class Honorario : Entity
         else CalcularValeTransporte(valorPassagem);
     }
 
-    public void CalcularLucroBruto()
+    public void CalcularBeneficiosPrevidencia()
     {
-        LucroBruto = ValorHonorario - SimplesNacional - ServicoContabil;
+        CalcularFgts();
+        CalcularInss();
+        CalcularIrpf();
+    }
 
+    public void CalcularHonorarioComImposto(decimal porcentamSimplesNacional)
+    {
+        CalcularHonorario();
+        CalcularSimplesNacional(porcentamSimplesNacional);
+    }
+
+    public void CalcularLucroEProLabore()
+    {
+        CalcularLucroBruto();
+        CalcularProlaboreLiquido();
         CalcularLucroLiquido();
     }
 
-
     #region Private Methods
     private const int QUANTIDADE_DIAS = 22;
-    private const decimal FGTS_PORCENTAGEM = 8 / 100;
-    private const decimal INSS_PORCENTAGEM = 11 / 100;
+    private const decimal FGTS_PORCENTAGEM = (decimal)8 / 100;
+    private const decimal INSS_PORCENTAGEM = (decimal)11 / 100;
     private const decimal IRPF_PORCENTAGEM = (decimal)22.50 / 100;
-    private const double FATOR_MULTIPLICADOR = 1.06;
+    private const decimal FATOR_MULTIPLICADOR = (decimal)1.06;
 
-    private void CalcularProvisaoFerias(decimal rendaMensal)
-    {
-        ProvisaoFerias = (rendaMensal / 12) * ((rendaMensal / 12) / 3);
+    private void CalcularProvisaoFerias(decimal rendaMensal) => ProvisaoFerias = decimal.Round((rendaMensal / 12) + ((rendaMensal / 12) / 3), 2);
 
-        //CalcularFgts();
-    }
+    private void CalcularProvisaoDecimoTerceiro(decimal rendaMensal) => ProvisaoDecimoTerceiro = decimal.Round(rendaMensal / 12, 2);
 
-    private void CalcularProvisaoDecimoTerceiro(decimal rendaMensal)
-    {
-        ProvisaoDecimoTerceiro = rendaMensal / 12;
+    private void CalcularValeRefeicao(decimal valor) => decimal.Round(ValeRefeicao = valor * QUANTIDADE_DIAS, 2);
 
-        //CalcularFgts();
-    }
+    private void CalcularValeTransporte(decimal valor) => decimal.Round(ValeTransporte = valor * QUANTIDADE_DIAS, 2);
 
-    public void CalcularFgts()
-    {
-        Fgts = (ProLaboreBruto + ProvisaoFerias + ProvisaoDecimoTerceiro) * FGTS_PORCENTAGEM;
+    private void CalcularFgts() => Fgts = decimal.Round((ProLaboreBruto + ProvisaoFerias + ProvisaoDecimoTerceiro) * FGTS_PORCENTAGEM, 2);
 
-        //CalcularInss();
-        //CalcularHonorario();
-    }
+    private void CalcularInss() => Inss = decimal.Round(ProLaboreBruto * INSS_PORCENTAGEM, 2);
 
-    public void CalcularInss()
-    {
-        Inss = ProLaboreBruto * INSS_PORCENTAGEM;
+    private void CalcularIrpf() => Irpf = decimal.Round(ProLaboreBruto * IRPF_PORCENTAGEM, 2);
 
-        //CalcularProlaboreLiquido();
-    }
+    private void CalcularSimplesNacional(decimal porcentagem) => SimplesNacional = decimal.Round(ValorHonorario * (porcentagem / 100), 2);
 
-    private void CalcularValeRefeicao(decimal valor) => ValeRefeicao = valor * QUANTIDADE_DIAS;
+    private void CalcularHonorario() => ValorHonorario = decimal.Round((ProLaboreBruto + ProvisaoFerias + ProvisaoDecimoTerceiro + ValeRefeicao + ValeTransporte + Fgts + ServicoContabil) * FATOR_MULTIPLICADOR, 2);
 
-    private void CalcularValeTransporte(decimal valor) => ValeTransporte = valor * QUANTIDADE_DIAS;
+    private void CalcularLucroBruto() => LucroBruto = decimal.Round(ValorHonorario - SimplesNacional - ServicoContabil, 2);
 
-    public void CalcularProlaboreLiquido() => ProLaboreLiquido = ProLaboreBruto - Inss - Irpf;
+    private void CalcularLucroLiquido() => LucroLiquido = decimal.Round(LucroBruto - ProLaboreLiquido, 2);
 
-    private void CalcularLucroLiquido() => LucroLiquido = LucroBruto - ProLaboreLiquido;
-
-    public void CalcularHonorario() => ValorHonorario = (ProLaboreBruto + ProvisaoFerias + ProvisaoDecimoTerceiro + ValeRefeicao + ValeTransporte + Fgts + ServicoContabil) * (decimal)FATOR_MULTIPLICADOR;
-
-    public void CalcularSimplesNacional(double porcentagem) => SimplesNacional = ValorHonorario * ((decimal)porcentagem / 100);
-
-    public void CalcularIrpf() => Irpf = ProLaboreBruto * IRPF_PORCENTAGEM;
+    public void CalcularProlaboreLiquido() => ProLaboreLiquido = decimal.Round(ProLaboreBruto - Inss - Irpf, 2);
     #endregion
 }

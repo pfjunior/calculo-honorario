@@ -17,7 +17,7 @@ public class AdicionarHonorarioViewModel
     public decimal ServicoContabil { get; set; }
 
     [DisplayName("Simples Nacional")]
-    public double SimplesNacional { get; set; }
+    public decimal SimplesNacional { get; set; }
 
     [DisplayName("Tem VR?")]
     public bool TemValeRefeicao { get; set; } = false;

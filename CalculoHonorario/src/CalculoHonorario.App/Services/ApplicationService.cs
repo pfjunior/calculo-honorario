@@ -37,16 +37,10 @@ public class ApplicationService : BaseService, IApplicationService
     {
         var honorario = new Honorario(model.Descricao, model.RendaMensal, model.ServicoContabil);
         honorario.CalcularProvisaoFeriasDecimoTerceiro(model.RendaMensal);
-        honorario.CalcularFgts();
-        // TODO: Refatorar o calculo do vale transporte quando tiver mais de uma passagem
         honorario.CalcularVales(model.TemValeRefeicao ? model.ValorVR : 0, model.TemValeTransporte ? model.ValorVT : 0);
-        honorario.CalcularHonorario();
-        honorario.CalcularSimplesNacional(model.SimplesNacional);
-        honorario.CalcularLucroBruto();
-        honorario.CalcularInss();
-        honorario.CalcularIrpf();
-        honorario.CalcularProlaboreLiquido();
-
+        honorario.CalcularBeneficiosPrevidencia();
+        honorario.CalcularHonorarioComImposto(model.SimplesNacional);
+        honorario.CalcularLucroEProLabore();
 
         await _service.AdicionarAsync(honorario);
     }

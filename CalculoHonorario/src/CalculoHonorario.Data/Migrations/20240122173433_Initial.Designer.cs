@@ -11,7 +11,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace CalculoHonorario.Data.Migrations
 {
     [DbContext(typeof(ApplicationContext))]
-    [Migration("20240120132526_Initial")]
+    [Migration("20240122173433_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
