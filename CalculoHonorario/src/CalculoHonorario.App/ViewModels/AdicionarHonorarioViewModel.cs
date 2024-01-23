@@ -16,14 +16,8 @@ public class AdicionarHonorarioViewModel
     [DisplayName("Simples Nacional (%)")]
     public decimal SimplesNacional { get; set; }
 
-    [DisplayName("Tem VR?")]
-    public bool TemValeRefeicao { get; set; } = false;
-
     [DisplayName("Valor do VR (R$)")]
     public decimal ValorVR { get; set; }
-
-    [DisplayName("Tem VT?")]
-    public bool TemValeTransporte { get; set; } = false;
 
     [DisplayName("Valor da Passagem (R$)")]
     public decimal ValorVT { get; set; }

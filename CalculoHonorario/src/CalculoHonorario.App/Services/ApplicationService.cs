@@ -37,7 +37,7 @@ public class ApplicationService : BaseService, IApplicationService
     {
         var honorario = new Honorario(model.Descricao, model.RendaMensal, model.ServicoContabil);
         honorario.CalcularProvisaoFeriasDecimoTerceiro(model.RendaMensal);
-        honorario.CalcularVales(model.TemValeRefeicao ? model.ValorVR : 0, model.TemValeTransporte ? model.ValorVT : 0);
+        honorario.CalcularVales(model.ValorVR, model.ValorVT);
         honorario.CalcularBeneficiosPrevidencia();
         honorario.CalcularHonorarioComImposto(model.SimplesNacional);
         honorario.CalcularLucroEProLabore();

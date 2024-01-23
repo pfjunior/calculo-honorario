@@ -1,0 +1,133 @@
+﻿@model CalculoHonorario.App.ViewModels.HonorarioViewModel
+
+@{
+    ViewData["Title"] = "Excluir " + Model.Descricao;
+}
+
+<div class="card">
+    <div class="card-header align-middle">
+        <h1 class="float-start">@ViewData["Title"]</h1>
+    </div>
+
+    <div class="card-body">  
+        <div class="row">
+            <div class="col-4">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.ValorHonorario)</dt>
+                    <dd>@Html.DisplayFor(model => model.ValorHonorario)</dd>
+                </dl>
+            </div>
+
+            <div class="col-4">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.ProLaboreBruto)</dt>
+                    <dd>@Html.DisplayFor(model => model.ProLaboreBruto)</dd>
+                </dl>
+            </div>
+
+            <div class="col-4">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.ProLaboreLiquido)</dt>
+                    <dd>@Html.DisplayFor(model => model.ProLaboreLiquido)</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.Fgts)</dt>
+                    <dd>@Html.DisplayFor(model => model.Fgts)</dd>
+                </dl>
+            </div>
+
+            <div class="col-4">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.Inss)</dt>
+                    <dd>@Html.DisplayFor(model => model.Inss)</dd>
+                </dl>
+            </div>
+
+            <div class="col-4">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.Irpf)</dt>
+                    <dd>@Html.DisplayFor(model => model.Irpf)</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.ServicoContabil)</dt>
+                    <dd>@Html.DisplayFor(model => model.ServicoContabil)</dd>
+                </dl>
+            </div>
+
+            <div class="col-4">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.SimplesNacional)</dt>
+                    <dd>@Html.DisplayFor(model => model.SimplesNacional)</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.ProvisaoFerias)</dt>
+                    <dd>@Html.DisplayFor(model => model.ProvisaoFerias)</dd>
+                </dl>
+            </div>
+
+            <div class="col-4">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.ProvisaoDecimoTerceiro)</dt>
+                    <dd>@Html.DisplayFor(model => model.ProvisaoDecimoTerceiro)</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.ValeRefeicao)</dt>
+                    <dd>@Html.DisplayFor(model => model.ValeRefeicao)</dd>
+                </dl>
+            </div>
+
+            <div class="col-4">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.ValeTransporte)</dt>
+                    <dd>@Html.DisplayFor(model => model.ValeTransporte)</dd>
+                </dl>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-4">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.LucroBruto)</dt>
+                    <dd>@Html.DisplayFor(model => model.LucroBruto)</dd>
+                </dl>
+            </div>
+
+            <div class="col-4">
+                <dl>
+                    <dt>@Html.DisplayNameFor(model => model.LucroLiquido)</dt>
+                    <dd>@Html.DisplayFor(model => model.LucroLiquido)</dd>
+                </dl>
+            </div>
+        </div>
+    </div>
+    <div class="card-footer clearfix">
+        <form asp-action="Delete">
+            <input type="hidden" asp-for="Id" />
+            <input type="submit" value="Excluir" class="btn btn-danger float-end" />
+            <a class="btn btn-secondary float-end me-2" href="javascript:window.history.back();">Voltar</a>
+        </form>
+    </div>
+</div>
+
+
+

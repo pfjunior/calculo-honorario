@@ -36,10 +36,10 @@ public class Honorario : Entity
 
     public void CalcularVales(decimal valorVR, decimal valorPassagem)
     {
-        if (valorVR == 0) ValeRefeicao = valorVR;
+        if (valorVR == 0) ValeRefeicao = 0;
         else CalcularValeRefeicao(valorVR);
 
-        if (valorPassagem == 0) ValeTransporte = valorPassagem;
+        if (valorPassagem == 0) ValeTransporte = 0;
         else CalcularValeTransporte(valorPassagem);
     }
 
