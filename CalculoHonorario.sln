@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{2DCEF489-19A9-4409-A6F1-08AA021CB0F4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{0F5B8A28-926C-4BB5-937E-3DC7E03A673E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CalculoHonorario.Api", "CalculoHonorario.Api\CalculoHonorario.Api.csproj", "{496992EE-9E82-4CBE-A055-462052870861}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{496992EE-9E82-4CBE-A055-462052870861}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{496992EE-9E82-4CBE-A055-462052870861}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{496992EE-9E82-4CBE-A055-462052870861}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{496992EE-9E82-4CBE-A055-462052870861}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{496992EE-9E82-4CBE-A055-462052870861} = {2DCEF489-19A9-4409-A6F1-08AA021CB0F4}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {A87FE3BA-5CF1-4344-AE76-FAB897129A60}
+	EndGlobalSection
+EndGlobal
