@@ -14,7 +14,7 @@ POST {{HostAddress}}/{{PATH}}
 Content-Type: application/json
 
 {
-  "descricao": "Teste 2",
+  "descricao": "Teste",
   "rendaMensal": 8500.00,
   "servicoContabil": "170",
   "simplesNacional": 6,
