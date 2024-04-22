@@ -24,13 +24,21 @@ public class AdicionarHonorarioDto : BaseDto
     {
         public AdicionarHonorarioDtoValidation()
         {
+            RuleFor(h => h.Descricao)
+                .NotEmpty().WithMessage("O campo {PropertyName} precisa ser informado");
+            RuleFor(h => h.RendaMensal)
+                .NotEmpty().WithMessage("O campo {PropertyName} precisa ser informado")
+                .GreaterThan(0).WithMessage("O campo {PropertyName} precisa ser maior que {ComparisonValue}");
             RuleFor(h => h.ServicoContabil)
                 .NotEmpty().WithMessage("O campo {PropertyName} precisa ser informado")
                 .GreaterThan(0).WithMessage("O campo {PropertyName} precisa ser maior que {ComparisonValue}");
-
             RuleFor(h => h.SimplesNacional)
                 .NotEmpty().WithMessage("O campo {PropertyName} precisa ser informado")
                 .GreaterThan(0).WithMessage("O campo {PropertyName} precisa ser maior que {ComparisonValue}");
+            RuleFor(h => h.ValorVR)
+                .NotEmpty().WithMessage("O campo {PropertyName} precisa ser informado");
+            RuleFor(h => h.ValorVT)
+            .NotEmpty().WithMessage("O campo {PropertyName} precisa ser informado");
         }
     }
     #endregion

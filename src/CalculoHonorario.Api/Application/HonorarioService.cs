@@ -34,6 +34,8 @@ public class HonorarioService : Service, IHonorarioService
 
     public async Task<bool> AdicionarAsync(AdicionarHonorarioDto model)
     {
+        if (!model.EhValido()) return false;
+
         var honorario = new Honorario(model.Descricao, model.RendaMensal, model.ServicoContabil);
         honorario.CalcularProvisaoFeriasDecimoTerceiro(model.RendaMensal);
         honorario.CalcularVales(model.ValorVR, model.ValorVT);
@@ -42,14 +44,21 @@ public class HonorarioService : Service, IHonorarioService
         honorario.CalcularLucroEProLabore();
 
         await _repository.AdicionarAsync(honorario);
-
         return await _repository.UnitOfWork.CommitAsync();
-
     }
 
-    public Task<bool> RemoverAsync(Guid id)
+    public async Task<bool> RemoverAsync(Guid id)
     {
-        throw new NotImplementedException();
+        var honorario = await _repository.ObterPorIdAsync(id);
+
+        if (honorario == null)
+        {
+            AdicionarErro("Honorário não encontrado");
+            return false;
+        }
+
+        _repository.Remover(honorario);
+        return await _repository.UnitOfWork.CommitAsync();
     }
 
 

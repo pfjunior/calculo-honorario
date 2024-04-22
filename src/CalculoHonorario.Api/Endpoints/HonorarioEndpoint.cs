@@ -15,6 +15,7 @@ public static class HonorarioEndpoint
         root.MapGet("/{id}", ObterPorId).Produces<IResult>();
 
         root.MapPost("/", Adicionar).Produces<IResult>();
+        root.MapDelete("/{id}", Remover).Produces<IResult>();
     }
 
     private static async Task<IResult> ObterTodos([FromServices] IHonorarioService _service)
@@ -45,6 +46,14 @@ public static class HonorarioEndpoint
         var resultado = await _service.AdicionarAsync(model);
 
         if (!resultado) resposta.AdicionarErro("Houve um erro ao persistir os dados");
+
+        return resposta.RespostaPadrao();
+    }
+
+    private static async Task<IResult> Remover([FromServices] IHonorarioService _service, [FromRoute] Guid id)
+    {
+        var resposta = new ResultadoResposta();
+        await _service.RemoverAsync(id);
 
         return resposta.RespostaPadrao();
     }
