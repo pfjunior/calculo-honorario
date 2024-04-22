@@ -11,21 +11,21 @@ public class ResultadoResposta
     public MensagemErroResposta Erros { get; set; }
 
 
-    protected IResult RespostaPadrao(object? result = null)
+    public IResult RespostaPadrao(object? result = null)
     {
         return OperacaoValida() ?
             Results.Ok(result) :
             Results.BadRequest(new HttpValidationProblemDetails(new Dictionary<string, string[]> { { "Mensagens", Erros.Mensagens.ToArray() } }));
     }
 
-    protected IResult RespostaPadrao(ValidationResult validationResult)
+    public IResult RespostaPadrao(ValidationResult validationResult)
     {
         foreach (var error in validationResult.Errors) AdicionarErro(error.ErrorMessage);
 
         return RespostaPadrao();
     }
 
-    protected IResult RespostaPadrao(ResultadoResposta resposta)
+    public IResult RespostaPadrao(ResultadoResposta resposta)
     {
         RespostaPossuiErros(resposta);
 
@@ -41,9 +41,11 @@ public class ResultadoResposta
         return true;
     }
 
+    public void AdicionarErro(string erro) => Erros.Mensagens.Add(erro);
+
+    public void LimparErros() => Erros.Mensagens.Clear();
+
     protected bool OperacaoValida() => !Erros.Mensagens.Any();
 
-    protected void AdicionarErro(string erro) => Erros.Mensagens.Add(erro);
 
-    protected void LimparErros() => Erros.Mensagens.Clear();
 }

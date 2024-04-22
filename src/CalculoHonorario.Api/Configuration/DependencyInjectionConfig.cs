@@ -1,4 +1,5 @@
-﻿using CalculoHonorario.Api.Domain.Interface;
+﻿using CalculoHonorario.Api.Application;
+using CalculoHonorario.Api.Domain.Interface;
 using CalculoHonorario.Api.Infra.Data;
 using CalculoHonorario.Api.Infra.Data.Repository;
 
@@ -11,6 +12,9 @@ public static class DependencyInjectionConfig
         // Data
         services.AddScoped<ApplicationContext>();
         services.AddScoped<IHonorarioRepository, HonorarioRepository>();
+
+        // Services
+        services.AddScoped<IHonorarioService, HonorarioService>();
     }
 }
 

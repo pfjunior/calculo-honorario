@@ -19,5 +19,5 @@ public class HonorarioDto
     public decimal ValeRefeicao { get; set; }
     public decimal ValeTransporte { get; set; }
     public DateTime CadastradoEm { get; set; }
-    public DateTime AtualizadoEm { get; set; }
+    public DateTime? AtualizadoEm { get; set; }
 }

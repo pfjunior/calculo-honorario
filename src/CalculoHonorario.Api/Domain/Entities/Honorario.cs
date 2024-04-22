@@ -13,7 +13,7 @@ public class Honorario
     }
 
     public Guid Id { get; private set; }
-    public string? Descricao { get; private set; }
+    public string Descricao { get; private set; }
     public decimal ProLaboreBruto { get; private set; }
     public decimal ProLaboreLiquido { get; private set; }
     public decimal LucroBruto { get; private set; }

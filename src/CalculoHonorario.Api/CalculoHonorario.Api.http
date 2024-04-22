@@ -1,5 +1,23 @@
 @HostAddress = http://localhost:5185
+@PATH = api/honorario
 
-### Home
-GET {{HostAddress}}/
+### ObterTodos
+GET {{HostAddress}}/{{PATH}}
 Accept: application/json
+
+### ObterPorId
+GET {{HostAddress}}/{{PATH}}/{id}
+Accept: application/json
+
+### Adicionar
+POST {{HostAddress}}/{{PATH}}
+Content-Type: application/json
+
+{
+    "descricao": "string",
+  "rendaMensal": 0,
+  "servicoContabil": 0,
+  "simplesNacional": 0,
+  "valorVR": 0,
+  "valorVT": 0
+}

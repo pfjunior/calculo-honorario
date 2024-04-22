@@ -17,6 +17,6 @@ var app = builder.Build();
 
 app.UseApiConfigurarion();
 
-app.MapHomeEndpoint();
+app.MapHonorarioEndpoint();
 
 app.Run();
