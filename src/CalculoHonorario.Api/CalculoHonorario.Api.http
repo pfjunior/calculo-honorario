@@ -6,7 +6,7 @@ GET {{HostAddress}}/{{PATH}}
 Accept: application/json
 
 ### ObterPorId
-GET {{HostAddress}}/{{PATH}}/a3d9ce19-8106-4a0a-a7ba-aee23ba7beed
+GET {{HostAddress}}/{{PATH}}/660d2831-d12c-4896-ad80-76aa63b752a2
 Accept: application/json
 
 ### Adicionar
@@ -14,7 +14,7 @@ POST {{HostAddress}}/{{PATH}}
 Content-Type: application/json
 
 {
-  "descricao": "",
+  "descricao": "Teste 2",
   "rendaMensal": 8500.00,
   "servicoContabil": "170",
   "simplesNacional": 6,
@@ -23,5 +23,5 @@ Content-Type: application/json
 }
 
 ### Remover
-DELETE {{HostAddress}}/{{PATH}}/a3d9ce19-8106-4a0a-a7ba-aee23ba7beea
+DELETE {{HostAddress}}/{{PATH}}/93959fbd-5f45-415b-a8fa-131853c676f6
 Content-Type: application/json

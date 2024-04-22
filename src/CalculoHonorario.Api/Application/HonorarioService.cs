@@ -5,7 +5,7 @@ using CalculoHonorario.Api.Domain.Interface;
 
 namespace CalculoHonorario.Api.Application;
 
-public class HonorarioService : Service, IHonorarioService
+public class HonorarioService : IHonorarioService
 {
     private readonly IHonorarioRepository _repository;
     private readonly IMapper _mapper;
@@ -22,20 +22,12 @@ public class HonorarioService : Service, IHonorarioService
     {
         var honorarioDto = await ObterHonorario(id);
 
-        if (honorarioDto == null)
-        {
-            AdicionarErro("Honorário não encontrado");
-            return null;
-        }
-
-        return honorarioDto;
+        return honorarioDto != null ? honorarioDto : null;
     }
 
 
     public async Task<bool> AdicionarAsync(AdicionarHonorarioDto model)
     {
-        if (!model.EhValido()) return false;
-
         var honorario = new Honorario(model.Descricao, model.RendaMensal, model.ServicoContabil);
         honorario.CalcularProvisaoFeriasDecimoTerceiro(model.RendaMensal);
         honorario.CalcularVales(model.ValorVR, model.ValorVT);
@@ -51,11 +43,7 @@ public class HonorarioService : Service, IHonorarioService
     {
         var honorario = await _repository.ObterPorIdAsync(id);
 
-        if (honorario == null)
-        {
-            AdicionarErro("Honorário não encontrado");
-            return false;
-        }
+        if (honorario == null) return false;
 
         _repository.Remover(honorario);
         return await _repository.UnitOfWork.CommitAsync();

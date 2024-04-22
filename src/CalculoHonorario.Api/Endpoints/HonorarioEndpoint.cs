@@ -1,6 +1,7 @@
 ﻿using CalculoHonorario.Api.Application;
 using CalculoHonorario.Api.Application.Models;
-using CalculoHonorario.Api.Communication;
+using FluentValidation;
+using FluentValidation.Results;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CalculoHonorario.Api.Endpoints;
@@ -11,50 +12,61 @@ public static class HonorarioEndpoint
     {
         var root = app.MapGroup("/api/honorario").WithOpenApi();
 
-        root.MapGet("/", ObterTodos).Produces<IResult>();
-        root.MapGet("/{id}", ObterPorId).Produces<IResult>();
+        root.MapGet("/", ObterTodos)
+            .Produces<HonorarioDto>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status404NotFound)
+            .WithName("ObterTodos");
 
-        root.MapPost("/", Adicionar).Produces<IResult>();
-        root.MapDelete("/{id}", Remover).Produces<IResult>();
+        root.MapGet("/{id}", ObterPorId)
+            .Produces<HonorarioDto>(StatusCodes.Status200OK)
+            .Produces(StatusCodes.Status404NotFound)
+            .WithName("ObterPorId");
+
+        root.MapPost("/", Adicionar)
+            .Produces<HonorarioDto>(StatusCodes.Status201Created)
+            .Produces(StatusCodes.Status400BadRequest)
+            .ProducesValidationProblem()
+            .WithName("Adicionar");
+
+        root.MapDelete("/{id}", Remover)
+            .Produces(StatusCodes.Status204NoContent)
+            .Produces(StatusCodes.Status404NotFound)
+            .Produces(StatusCodes.Status400BadRequest)
+            .WithName("Remover");
     }
 
     private static async Task<IResult> ObterTodos([FromServices] IHonorarioService _service)
     {
-        var resposta = new ResultadoResposta();
         var resultado = await _service.ObterTodosAsync();
 
-        return resposta.RespostaPadrao(resultado);
+        return resultado.Any() ? Results.Ok(resultado) : Results.NotFound("A busca não encontrou nenhum registro");
     }
 
     private static async Task<IResult> ObterPorId([FromServices] IHonorarioService _service, [FromRoute] Guid id)
     {
-        var resposta = new ResultadoResposta();
         var resultado = await _service.ObterPorIdAsync(id);
 
-        if (resultado == null)
-        {
-            resposta.AdicionarErro("A busca não encontrou resultado");
-            return resposta.RespostaPadrao();
-        }
-
-        return resposta.RespostaPadrao(resultado);
+        return resultado != null ? Results.Ok(resultado) : Results.NotFound("Não foi possível encontrar o registro com o id informado");
     }
 
-    private static async Task<IResult> Adicionar([FromServices] IHonorarioService _service, [FromBody] AdicionarHonorarioDto model)
+    private static async Task<IResult> Adicionar(IValidator<AdicionarHonorarioDto> validator, [FromServices] IHonorarioService _service, [FromBody] AdicionarHonorarioDto model)
     {
-        var resposta = new ResultadoResposta();
+        ValidationResult validationResult = await validator.ValidateAsync(model);
+
+        if (!validationResult.IsValid) return Results.ValidationProblem(validationResult.ToDictionary());
+
         var resultado = await _service.AdicionarAsync(model);
 
-        if (!resultado) resposta.AdicionarErro("Houve um erro ao persistir os dados");
-
-        return resposta.RespostaPadrao();
+        return resultado ? Results.Created() : Results.BadRequest("Houve um erro ao persistir o registro");
     }
 
     private static async Task<IResult> Remover([FromServices] IHonorarioService _service, [FromRoute] Guid id)
     {
-        var resposta = new ResultadoResposta();
-        await _service.RemoverAsync(id);
+        var honorario = await _service.ObterPorIdAsync(id);
+        if (honorario == null) return Results.NotFound("Não foi possível encontrar o registro com o id informado");
 
-        return resposta.RespostaPadrao();
+        var resultado = await _service.RemoverAsync(id);
+
+        return resultado ? Results.NoContent() : Results.BadRequest("Houve um erro ao remover o registro");
     }
 }
