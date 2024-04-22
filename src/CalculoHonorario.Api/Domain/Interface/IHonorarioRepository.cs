@@ -1,4 +1,4 @@
-﻿using CalculoHonorario.Api.Domain.Models;
+﻿using CalculoHonorario.Api.Domain.Entities;
 using System.Linq.Expressions;
 
 namespace CalculoHonorario.Api.Domain.Interface;

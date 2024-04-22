@@ -2,5 +2,5 @@
 
 public static class HomeEndpoint
 {
-    public static void MapHomeEndpoint(this WebApplication app) => app.MapGet("/", () => Results.Ok("Teste"));
+    public static void MapHomeEndpoint(this WebApplication app) => app.MapGet("/", () => Results.Ok("Hello World!"));
 }

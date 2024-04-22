@@ -1,5 +1,5 @@
-﻿using CalculoHonorario.Api.Domain.Interface;
-using CalculoHonorario.Api.Domain.Models;
+﻿using CalculoHonorario.Api.Domain.Entities;
+using CalculoHonorario.Api.Domain.Interface;
 using Microsoft.EntityFrameworkCore;
 
 namespace CalculoHonorario.Api.Infra.Data;

@@ -1,4 +1,4 @@
-﻿namespace CalculoHonorario.Api.Domain.Models;
+﻿namespace CalculoHonorario.Api.Domain.Entities;
 
 public class Honorario
 {
@@ -66,14 +66,14 @@ public class Honorario
         CalcularLucroLiquido();
     }
 
-    #region Private Methods
+    #region Metodos Privado
     private const int QUANTIDADE_DIAS = 22;
     private const decimal FGTS_PORCENTAGEM = (decimal)8 / 100;
     private const decimal INSS_PORCENTAGEM = (decimal)11 / 100;
     private const decimal IRPF_PORCENTAGEM = (decimal)22.50 / 100;
     private const decimal FATOR_MULTIPLICADOR = (decimal)1.06;
 
-    private void CalcularProvisaoFerias(decimal rendaMensal) => ProvisaoFerias = decimal.Round((rendaMensal / 12) + ((rendaMensal / 12) / 3), 2);
+    private void CalcularProvisaoFerias(decimal rendaMensal) => ProvisaoFerias = decimal.Round(rendaMensal / 12 + rendaMensal / 12 / 3, 2);
 
     private void CalcularProvisaoDecimoTerceiro(decimal rendaMensal) => ProvisaoDecimoTerceiro = decimal.Round(rendaMensal / 12, 2);
 
