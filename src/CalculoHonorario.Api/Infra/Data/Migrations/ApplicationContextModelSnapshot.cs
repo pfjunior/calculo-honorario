@@ -3,8 +3,8 @@ using System;
 using CalculoHonorario.Api.Infra.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
-using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
+using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 #nullable disable
 
@@ -18,23 +18,21 @@ namespace CalculoHonorario.Api.Infra.Data.Migrations
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("ProductVersion", "8.0.3")
-                .HasAnnotation("Relational:MaxIdentifierLength", 128);
+                .HasAnnotation("Relational:MaxIdentifierLength", 63);
 
-            SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
+            NpgsqlModelBuilderExtensions.UseIdentityByDefaultColumns(modelBuilder);
 
-            modelBuilder.Entity("CalculoHonorario.Api.Domain.Models.Honorario", b =>
+            modelBuilder.Entity("CalculoHonorario.Api.Domain.Entities.Honorario", b =>
                 {
                     b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<DateTime?>("AtualizadoEm")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("uuid");
 
                     b.Property<DateTime>("CadastradoEm")
-                        .HasColumnType("datetime2");
+                        .HasColumnType("timestamp without time zone");
 
                     b.Property<string>("Descricao")
+                        .IsRequired()
                         .HasColumnType("varchar(100)");
 
                     b.Property<decimal>("Fgts")

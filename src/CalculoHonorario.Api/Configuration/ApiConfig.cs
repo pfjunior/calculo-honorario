@@ -7,7 +7,8 @@ public static class ApiConfig
 {
     public static void AddApiConfiguration(this IServiceCollection services, IConfiguration configuration)
     {
-        services.AddDbContext<ApplicationContext>(options => options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
+        AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+        services.AddDbContext<ApplicationContext>(options => options.UseNpgsql(configuration.GetConnectionString("DefaultConnection")));
         services.AddEndpointsApiExplorer();
         services.AddCors(options => { options.AddPolicy("Total", builder => builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader()); });
     }

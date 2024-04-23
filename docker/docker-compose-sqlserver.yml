@@ -1,0 +1,32 @@
+version: "3.8"
+
+services:
+    calculo-honorario-db:
+        image: mcr.microsoft.com/mssql/server
+        container_name: calculo-honorario-db
+        build:
+            context: ../sql
+            dockerfile: ./Dockerfile
+        expose:
+            - 1433:1434
+        environment:
+            SA_PASWORD: "express@CHDB"
+            ACCEPT_EULA: "Y"
+
+    calculo-honorario-api:
+        image: calculo-honorario-api:latest
+        container_name: calculo-honorario-api
+        build:
+            context: ../src/CalculoHonorario.Api
+            dockerfile: ./Dockerfile
+        restart: always
+        ports:
+            - 8080:8080
+        environment:
+            ASPNETCORE_ENVIRONMENT: Docker
+            ASPNETCORE_URLS: http://+:8080
+            USE_HTTPS_REDIRECTION: "false"
+            CUSTOMCONNSTR_DefaultConnection: "Server=calculo-honorario-db;Database=CalculoHonorario;User Id=sa;Password=express@SQL;TrustServerCertificate=True;MultipleActiveResultSets=true;"
+            AppSettings_DatabaseType: SqlServer
+        depends_on:
+            - calculo-honorario-db

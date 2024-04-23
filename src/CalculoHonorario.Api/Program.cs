@@ -17,6 +17,8 @@ var app = builder.Build();
 
 app.UseApiConfigurarion();
 
+app.MapGet("/", () => "Hello World!");
+
 app.MapHonorarioEndpoint();
 
 app.Run();

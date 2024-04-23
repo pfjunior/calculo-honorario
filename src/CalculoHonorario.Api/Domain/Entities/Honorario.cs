@@ -29,7 +29,6 @@ public class Honorario
     public decimal ServicoContabil { get; private set; }
     public decimal SimplesNacional { get; private set; }
     public DateTime CadastradoEm { get; private set; }
-    public DateTime? AtualizadoEm { get; private set; }
 
     public void CalcularProvisaoFeriasDecimoTerceiro(decimal rendaMensal)
     {
