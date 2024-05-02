@@ -1,5 +1,5 @@
-# @HostAddress = http://localhost:5185
-@HostAddress = http://localhost:8080
+@HostAddress = http://localhost:5185
+# @HostAddress = http://localhost:8080
 @PATH = api/honorario
 
 ### ObterTodos
@@ -7,7 +7,7 @@ GET {{HostAddress}}/{{PATH}}
 Accept: application/json
 
 ### ObterPorId
-GET {{HostAddress}}/{{PATH}}/660d2831-d12c-4896-ad80-76aa63b752a2
+GET {{HostAddress}}/{{PATH}}/69a8ee0a-e56d-4ef0-979d-da1f85d7f700
 Accept: application/json
 
 ### Adicionar
@@ -15,12 +15,12 @@ POST {{HostAddress}}/{{PATH}}
 Content-Type: application/json
 
 {
-  "descricao": "Teste",
+  "descricao": "Proposta 02",
   "rendaMensal": 8500.00,
   "servicoContabil": "170",
   "simplesNacional": 6,
-  "valorVR": 35.50,
-  "valorVT": "12.40"
+  "valorVR": 0,
+  "valorVT": 0
 }
 
 ### Remover

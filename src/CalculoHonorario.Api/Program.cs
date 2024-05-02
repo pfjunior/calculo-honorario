@@ -11,7 +11,6 @@ builder.Configuration.SetBasePath(builder.Environment.ContentRootPath)
 builder.Services.AddApiConfiguration(builder.Configuration);
 builder.Services.AddSwaggerConfiguration();
 builder.Services.RegisterServices();
-builder.Services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());
 
 var app = builder.Build();
 

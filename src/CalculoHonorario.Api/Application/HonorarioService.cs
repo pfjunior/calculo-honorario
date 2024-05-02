@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using CalculoHonorario.Api.Application.Models;
+﻿using CalculoHonorario.Api.Application.Models;
 using CalculoHonorario.Api.Domain.Entities;
 using CalculoHonorario.Api.Domain.Interface;
 
@@ -8,15 +7,11 @@ namespace CalculoHonorario.Api.Application;
 public class HonorarioService : IHonorarioService
 {
     private readonly IHonorarioRepository _repository;
-    private readonly IMapper _mapper;
 
-    public HonorarioService(IHonorarioRepository repository, IMapper mapper)
-    {
-        _repository = repository;
-        _mapper = mapper;
-    }
+    public HonorarioService(IHonorarioRepository repository) => _repository = repository;
 
-    public async Task<IEnumerable<HonorarioDto>> ObterTodosAsync() => _mapper.Map<IEnumerable<HonorarioDto>>(await _repository.ObterTodosAsync());
+
+    public async Task<IEnumerable<HonorarioDto>> ObterTodosAsync() => await ObterTodosFormatado();
 
     public async Task<HonorarioDto> ObterPorIdAsync(Guid id)
     {
@@ -25,12 +20,11 @@ public class HonorarioService : IHonorarioService
         return honorarioDto != null ? honorarioDto : null;
     }
 
-
     public async Task<bool> AdicionarAsync(AdicionarHonorarioDto model)
     {
         var honorario = new Honorario(model.Descricao, model.RendaMensal, model.ServicoContabil);
         honorario.CalcularProvisaoFeriasDecimoTerceiro(model.RendaMensal);
-        honorario.CalcularVales(model.ValorVR, model.ValorVT);
+        honorario.CalcularVales(model.ValorVR ?? 0, model.ValorVT ?? 0);
         honorario.CalcularBeneficiosPrevidencia();
         honorario.CalcularHonorarioComImposto(model.SimplesNacional);
         honorario.CalcularLucroEProLabore();
@@ -50,5 +44,16 @@ public class HonorarioService : IHonorarioService
     }
 
 
-    private async Task<HonorarioDto> ObterHonorario(Guid id) => _mapper.Map<HonorarioDto>(await _repository.ObterPorIdAsync(id));
+
+    private async Task<HonorarioDto> ObterHonorario(Guid id) => HonorarioDto.ParaDto(await _repository.ObterPorIdAsync(id));
+
+    private async Task<IEnumerable<HonorarioDto>> ObterTodosFormatado()
+    {
+        var resultado = await _repository.ObterTodosAsync();
+        var honorariosDto = new List<HonorarioDto>();
+
+        foreach (var honorarioDto in resultado) honorariosDto.Add(HonorarioDto.ParaDto(honorarioDto));
+
+        return honorariosDto.AsEnumerable();
+    }
 }

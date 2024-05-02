@@ -24,8 +24,8 @@ public class Honorario
     public decimal Fgts { get; private set; }
     public decimal Inss { get; private set; }
     public decimal Irpf { get; private set; }
-    public decimal ValeRefeicao { get; private set; }
-    public decimal ValeTransporte { get; private set; }
+    public decimal? ValeRefeicao { get; private set; }
+    public decimal? ValeTransporte { get; private set; }
     public decimal ServicoContabil { get; private set; }
     public decimal SimplesNacional { get; private set; }
     public DateTime CadastradoEm { get; private set; }
@@ -39,10 +39,10 @@ public class Honorario
     public void CalcularVales(decimal valorVR, decimal valorPassagem)
     {
         if (valorVR == 0) ValeRefeicao = 0;
-        else CalcularValeRefeicao(valorVR);
+        else ValeRefeicao = CalcularValeRefeicao(valorVR);
 
         if (valorPassagem == 0) ValeTransporte = 0;
-        else CalcularValeTransporte(valorPassagem);
+        else ValeTransporte = CalcularValeTransporte(valorPassagem);
     }
 
     public void CalcularBeneficiosPrevidencia()
@@ -76,9 +76,9 @@ public class Honorario
 
     private void CalcularProvisaoDecimoTerceiro(decimal rendaMensal) => ProvisaoDecimoTerceiro = decimal.Round(rendaMensal / 12, 2);
 
-    private void CalcularValeRefeicao(decimal valor) => decimal.Round(ValeRefeicao = valor * QUANTIDADE_DIAS, 2);
+    private decimal CalcularValeRefeicao(decimal valor) => decimal.Round(valor * QUANTIDADE_DIAS, 2);
 
-    private void CalcularValeTransporte(decimal valor) => decimal.Round(ValeTransporte = valor * QUANTIDADE_DIAS, 2);
+    private decimal CalcularValeTransporte(decimal valor) => decimal.Round(valor * QUANTIDADE_DIAS, 2);
 
     private void CalcularFgts() => Fgts = decimal.Round((ProLaboreBruto + ProvisaoFerias + ProvisaoDecimoTerceiro) * FGTS_PORCENTAGEM, 2);
 
@@ -88,7 +88,7 @@ public class Honorario
 
     private void CalcularSimplesNacional(decimal porcentagem) => SimplesNacional = decimal.Round(ValorHonorario * (porcentagem / 100), 2);
 
-    private void CalcularHonorario() => ValorHonorario = decimal.Round((ProLaboreBruto + ProvisaoFerias + ProvisaoDecimoTerceiro + ValeRefeicao + ValeTransporte + Fgts + ServicoContabil) * FATOR_MULTIPLICADOR, 2);
+    private void CalcularHonorario() => ValorHonorario = decimal.Round((ProLaboreBruto + ProvisaoFerias + ProvisaoDecimoTerceiro + ValeRefeicao ?? 0 + ValeTransporte ?? 0 + Fgts + ServicoContabil) * FATOR_MULTIPLICADOR, 2);
 
     private void CalcularLucroBruto() => LucroBruto = decimal.Round(ValorHonorario - SimplesNacional - ServicoContabil, 2);
 

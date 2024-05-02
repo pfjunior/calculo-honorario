@@ -7,3 +7,4 @@ psql -v ON_ERROR_STOP=1 --username "postgres" <<-EOSQL
 EOSQL
 
 psql -U postgres -d calculohonorario -f sql/initial.sql
+psql -U postgres -d calculohonorario -f sql/vr-vt-nullable.sql

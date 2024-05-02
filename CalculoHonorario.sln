@@ -19,12 +19,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "docker", "docker", "{565E39
 		docker\docker-compose.yml = docker\docker-compose.yml
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "sql", "sql", "{408716FA-CB03-458A-847A-15667C1DB804}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "database", "database", "{465626A7-732D-4D3E-982F-FF9948D7922F}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "postgres", "postgres", "{D220424C-A5F9-4964-99C7-F69473364263}"
 	ProjectSection(SolutionItems) = preProject
-		sql\Dockerfile = sql\Dockerfile
-		sql\entrypoint.sh = sql\entrypoint.sh
-		sql\import-data.sh = sql\import-data.sh
-		sql\initial.sql = sql\initial.sql
+		database\postgres\entrypoint.sh = database\postgres\entrypoint.sh
+		database\postgres\initial.sql = database\postgres\initial.sql
+		database\postgres\vr-vt-nullable.sql = database\postgres\vr-vt-nullable.sql
 	EndProjectSection
 EndProject
 Global
@@ -44,7 +45,8 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{3351B742-68A8-4D0A-8944-BF953AFE7648} = {2DCEF489-19A9-4409-A6F1-08AA021CB0F4}
 		{565E3972-CF57-4A6E-9D6B-F28E66A09F1D} = {54F61B1C-AF3A-4BF5-A397-ACEC0A3FD24B}
-		{408716FA-CB03-458A-847A-15667C1DB804} = {54F61B1C-AF3A-4BF5-A397-ACEC0A3FD24B}
+		{465626A7-732D-4D3E-982F-FF9948D7922F} = {54F61B1C-AF3A-4BF5-A397-ACEC0A3FD24B}
+		{D220424C-A5F9-4964-99C7-F69473364263} = {465626A7-732D-4D3E-982F-FF9948D7922F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {A87FE3BA-5CF1-4344-AE76-FAB897129A60}
