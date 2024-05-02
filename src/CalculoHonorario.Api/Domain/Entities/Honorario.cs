@@ -88,7 +88,7 @@ public class Honorario
 
     private void CalcularSimplesNacional(decimal porcentagem) => SimplesNacional = decimal.Round(ValorHonorario * (porcentagem / 100), 2);
 
-    private void CalcularHonorario() => ValorHonorario = decimal.Round((ProLaboreBruto + ProvisaoFerias + ProvisaoDecimoTerceiro + ValeRefeicao ?? 0 + ValeTransporte ?? 0 + Fgts + ServicoContabil) * FATOR_MULTIPLICADOR, 2);
+    private void CalcularHonorario() => ValorHonorario = decimal.Round((ProLaboreBruto + ProvisaoFerias + ProvisaoDecimoTerceiro + (ValeRefeicao ?? 0) + (ValeTransporte ?? 0) + Fgts + ServicoContabil) * FATOR_MULTIPLICADOR, 2);
 
     private void CalcularLucroBruto() => LucroBruto = decimal.Round(ValorHonorario - SimplesNacional - ServicoContabil, 2);
 

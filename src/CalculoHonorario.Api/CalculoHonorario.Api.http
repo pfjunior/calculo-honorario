@@ -1,5 +1,5 @@
-@HostAddress = http://localhost:5185
-# @HostAddress = http://localhost:8080
+# @HostAddress = http://localhost:5185
+@HostAddress = http://localhost:8080
 @PATH = api/honorario
 
 ### ObterTodos
@@ -15,9 +15,9 @@ POST {{HostAddress}}/{{PATH}}
 Content-Type: application/json
 
 {
-  "descricao": "Proposta 02",
+  "descricao": "Proposta 01",
   "rendaMensal": 8500.00,
-  "servicoContabil": "170",
+  "servicoContabil": 179.00,
   "simplesNacional": 6,
   "valorVR": 0,
   "valorVT": 0
