@@ -12,7 +12,7 @@ public static class SwaggerConfig
             {
                 Title = "Cálculo Honorário",
                 Description = "API para calcular honorários de uma Pessoa Jurídica (PJ)",
-                Contact = new OpenApiContact() { Name = "Paulo Junior", Email = "pf.junior89@gmail.com" },
+                Contact = new OpenApiContact() { Name = "Paulo Junior", Url = new Uri("https://www.linkedin.com/in/pfjunior89/") },
                 License = new OpenApiLicense() { Name = "MIT", Url = new Uri("https://opensource.org/licenses/MIT") }
             });
         });
