@@ -61,7 +61,7 @@ NO VS Code, você pode executar com o [Thunder Cliente](https://marketplace.visu
 
 Você precisará ter:
 
-- Dokcer
+- Docker
 - Postgres instalado (ou container)
 
 > **IMPORTANTE**: Não esqueça de executar a migrations para criar o banco de dados antes de executar o projeto
