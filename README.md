@@ -4,7 +4,7 @@
 
 ## Sobre o Projeto
 
-A api é para calcular o honorário de uma pessoa que desaja trabalhar como PJ (Pessoa Jurídica) e gostaria de ter ganhos semelhantes ao do CLT. A ideia para desenvolver essa api veio depois de ler essa matéria (https://tinyurl.com/bdek5umr).
+A api é para calcular o honorário de uma pessoa que desaja trabalhar como PJ (Pessoa Jurídica) e gostaria de ter ganhos semelhantes ao do CLT. A ideia para desenvolver essa api veio depois de ler essa [matéria](https://tinyurl.com/bdf3ttew).
 
 ## Tecnologias
 
